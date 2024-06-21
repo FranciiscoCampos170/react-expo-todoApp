@@ -17,12 +17,27 @@ const todos = [
 ]
 
 export default function App() {
+
+  const myItemSeparator = () => {
+    return <View style={{height:1, backgroundColor: "grey", marginHorizontal:10}}></View>
+  }
+
+  const myListEmpty = () => {
+    return (
+      <View style={{alignItems:"center"}}>
+        <Text style={styles.item}>List is empty</Text>
+      </View>
+    )
+  }
+
   return (
     <SafeAreaView>
       <FlatList
         data={todos}
         renderItem={({item}) => <Text style={styles.item}>{item.name}</Text>}
         keyExtractor={(item) => item.id}
+        ItemSeparatorComponent= {myItemSeparator}
+        ListEmptyComponent = {myListEmpty}
         ListHeaderComponent={() => (
           <Text style={{fontSize:30, textAlign: "center", marginTop:20, fontWeight:'bold', textDecorationLine:'underline'}}>
             Todo List
