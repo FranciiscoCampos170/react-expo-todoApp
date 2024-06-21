@@ -23,6 +23,11 @@ export default function App() {
         data={todos}
         renderItem={({item}) => <Text style={styles.item}>{item.name}</Text>}
         keyExtractor={(item) => item.id}
+        ListHeaderComponent={() => (
+          <Text style={{fontSize:30, textAlign: "center", marginTop:20, fontWeight:'bold', textDecorationLine:'underline'}}>
+            Todo List
+          </Text>
+        )}
       />
     </SafeAreaView>
     
