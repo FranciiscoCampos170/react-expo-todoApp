@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native';
 
 const todos = [
   { id: "1",
@@ -18,18 +18,14 @@ const todos = [
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ScrollView>
-      {todos.map((todo) => {
-        return (
-          <View>
-            <Text style={styles.item}>{todo.name}</Text>
-          </View>
-        );
-      })}
-      <StatusBar style="auto" />
-      </ScrollView>
-    </View>
+    <SafeAreaView>
+      <FlatList
+        data={todos}
+        renderItem={({item}) => <Text style={styles.item}>{item.name}</Text>}
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView>
+    
   );
 }
 
