@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TextInput } from 'react-native';
 
-const todos = [
+const todosList = [
   { id: "1",
     name:"buy fruits"
   },
@@ -22,6 +23,13 @@ export default function App() {
     return <View style={{height:1, backgroundColor: "grey", marginHorizontal:10}}></View>
   }
 
+  const [todos, setTodos] = useState(() => addTodo());
+ 
+  function addTodo()
+  {
+    todosList = Object.assign({}, todosList, {id: "5", name:"Ola!"})
+  }
+
   const myListEmpty = () => {
     return (
       <View style={{alignItems:"center"}}>
@@ -32,8 +40,18 @@ export default function App() {
 
   return (
     <SafeAreaView>
+      <TextInput
+      style={styles.input}
+      placeholder='Add Task'
+      keyboardType='default'
+      onChangeText={setTodos}
+      onPointerEnter={setTodos}
+      value={todos}
+      >
+        
+      </TextInput>
       <FlatList
-        data={todos}
+        data={todosList}
         renderItem={({item}) => <Text style={styles.item}>{item.name}</Text>}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent= {myItemSeparator}
@@ -60,5 +78,11 @@ const styles = StyleSheet.create({
     padding:20,
     fontSize:15,
     marginTop:5
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   }
 });
