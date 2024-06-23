@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TextInput } from 'react-native';
 
 const todosList = [
-  { id: "1",
+  { id: 1,
     name:"buy fruits"
   },
-  { id: "2",
+  { id: 2,
     name:"meeting with boss"
   },
-  { id: "3",
+  { id: 3,
     name:"wash my car"
   },
-  { id: "4",
+  { id: 4,
     name:"lunch with friends"
   }
 ]
@@ -23,12 +23,14 @@ export default function App() {
     return <View style={{height:1, backgroundColor: "grey", marginHorizontal:10}}></View>
   }
 
-  const [todos, setTodos] = useState(() => addTodo());
- 
-  function addTodo()
+ // const [todos, setTodos] = useState(() => addTodo);
+  const [text, setText] = useState();
+
+ /* function addTodo()
   {
-    todosList = Object.assign({}, todosList, {id: "5", name:"Ola!"})
-  }
+    const newTodo = {id: "5", name:"Ola!"};
+    todosList.push(newTodo);
+  }*/
 
   const myListEmpty = () => {
     return (
@@ -44,10 +46,18 @@ export default function App() {
       style={styles.input}
       placeholder='Add Task'
       keyboardType='default'
-      onChangeText={setTodos}
-      onPointerEnter={setTodos}
-      value={todos}
+      value={text}
+      onChangeText={e => setText(e.target.value)}
       >
+    <button
+    onClick={() => {
+      setText(''),
+      setTodos([{
+        id: todosList.length,
+        name: text
+      },...todosList]);
+    }}
+    > Add </button>
         
       </TextInput>
       <FlatList
